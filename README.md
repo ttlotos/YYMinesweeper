@@ -19,6 +19,10 @@ A unique minesweeper game that lets you explore an AI-generated world of charact
 - 🌏 Multi-language support (Chinese/English)
 - 📱 Responsive design for various screen sizes
 
+## Demo Video
+
+https://github.com/user-attachments/assets/61dd1a92-8a8c-4596-ab0c-fa93587e972f
+
 ## Screenshots
 
 Here are some screenshots of the game interface:
