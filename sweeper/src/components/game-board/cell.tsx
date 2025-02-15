@@ -35,7 +35,8 @@ export function Cell({
     <Button
       variant="outline"
       className={cn(
-        "w-[72px] h-[72px] p-0 border relative",
+        "w-[72px] h-[72px] p-0 relative",
+        "border border-border/50",
         "perspective-[1000px]",
         !isRevealed && "hover:bg-secondary/50",
       )}
@@ -50,7 +51,8 @@ export function Cell({
         <div className={cn(
           "cell-front absolute w-full h-full flex items-center justify-center p-1",
           !isRevealed && "bg-background hover:bg-secondary/50",
-          "border rounded-[calc(theme(borderRadius.md)-1px)]"
+          "border border-border/50 rounded-[calc(theme(borderRadius.md)-1px)]",
+          "backdrop-blur-sm"
         )}>
           {!isFlagged ? (
             <span className={cn(
@@ -70,8 +72,9 @@ export function Cell({
         {/* 背面 */}
         <div className={cn(
           "cell-back absolute w-full h-full flex items-center justify-center",
-          isMine ? "bg-destructive" : "bg-secondary",
-          "border rounded-[calc(theme(borderRadius.md)-1px)]"
+          isMine ? "bg-destructive/90" : "bg-secondary/90",
+          "border border-border/50 rounded-[calc(theme(borderRadius.md)-1px)]",
+          "backdrop-blur-sm"
         )}>
           {isMine ? (
             <TooltipProvider>
@@ -90,11 +93,11 @@ export function Cell({
                 <TooltipTrigger asChild>
                   <span className={cn(
                     "font-bold text-2xl",
-                    adjacentMines === 1 && "text-blue-500",
-                    adjacentMines === 2 && "text-green-500",
-                    adjacentMines === 3 && "text-red-500",
-                    adjacentMines === 4 && "text-purple-500",
-                    adjacentMines >= 5 && "text-yellow-500"
+                    adjacentMines === 1 && "text-blue-500/90",
+                    adjacentMines === 2 && "text-green-500/90",
+                    adjacentMines === 3 && "text-red-500/90",
+                    adjacentMines === 4 && "text-purple-500/90",
+                    adjacentMines >= 5 && "text-yellow-500/90"
                   )}>
                     {adjacentMines}
                   </span>

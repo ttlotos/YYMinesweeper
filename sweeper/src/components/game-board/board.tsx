@@ -227,13 +227,19 @@ export function Board({
   }
 
   return (
-    <Card className="p-8 max-w-[900px] mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <div className="text-base font-medium">
-          <span>地雷: {minesCount} | 标记: {flagsCount}</span>
+    <div className="w-full max-w-[900px] mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center gap-4">
+          <div className="px-4 py-2 rounded-full bg-background/50 backdrop-blur-sm">
+            <span className="text-sm font-medium">地雷: {minesCount}</span>
+          </div>
+          <div className="px-4 py-2 rounded-full bg-background/50 backdrop-blur-sm">
+            <span className="text-sm font-medium">标记: {flagsCount}</span>
+          </div>
         </div>
         <Button
           variant="outline"
+          className="rounded-full px-6"
           onClick={initializeBoard}
           disabled={gameStatus === 'playing'}
         >
@@ -241,26 +247,29 @@ export function Board({
         </Button>
       </div>
       
-      <div className="flex justify-center">
-        <div className="grid gap-3" 
-          style={{
-            gridTemplateColumns: `repeat(${size.cols}, 72px)`,
-          }}
-        >
-          {board.map((row, rowIndex) =>
-            row.map((cell, colIndex) => (
-              <Cell
-                key={`${rowIndex}-${colIndex}`}
-                conceptName={cell.conceptName}
-                isMine={cell.isMine}
-                isRevealed={cell.isRevealed}
-                isFlagged={cell.isFlagged}
-                adjacentMines={cell.adjacentMines}
-                onClick={() => revealCell(rowIndex, colIndex)}
-                onRightClick={() => toggleFlag(rowIndex, colIndex)}
-              />
-            ))
-          )}
+      <div className="p-6 rounded-2xl backdrop-blur-sm">
+        <div className="flex justify-center">
+          <div 
+            className="grid gap-2 p-4 rounded-xl border bg-background/50" 
+            style={{
+              gridTemplateColumns: `repeat(${size.cols}, 72px)`,
+            }}
+          >
+            {board.map((row, rowIndex) =>
+              row.map((cell, colIndex) => (
+                <Cell
+                  key={`${rowIndex}-${colIndex}`}
+                  conceptName={cell.conceptName}
+                  isMine={cell.isMine}
+                  isRevealed={cell.isRevealed}
+                  isFlagged={cell.isFlagged}
+                  adjacentMines={cell.adjacentMines}
+                  onClick={() => revealCell(rowIndex, colIndex)}
+                  onRightClick={() => toggleFlag(rowIndex, colIndex)}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
 
@@ -269,6 +278,6 @@ export function Board({
           {gameStatus === 'won' ? '🎉 恭喜获胜！' : gameStatus === 'lost' ? '💥 游戏结束！' : '开始新游戏'}
         </div>
       )}
-    </Card>
+    </div>
   )
 } 

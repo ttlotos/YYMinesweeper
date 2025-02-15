@@ -90,35 +90,41 @@ export default function GamePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-muted">
       <ApiKeyDialog onApiKeySet={handleApiKeySet} />
-      <div className="container mx-auto px-4 py-8 md:py-12">
-        {/* Header Section */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+      
+      {/* Minimal Header */}
+      <header className="fixed top-0 left-0 right-0 z-10 bg-background/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+              ←
+            </Button>
+            <span className="text-sm font-medium">返回首页</span>
+          </Link>
+          <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
             人物扫雷
           </h1>
-          <Link href="/" passHref>
-            <Button variant="ghost" size="sm" className="rounded-full">
-              返回首页
-            </Button>
-          </Link>
+          <div className="w-20" /> {/* Spacer for balance */}
         </div>
+      </header>
 
-        {/* Game Setup Section */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <div className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-lg font-semibold">开始你的探索</h2>
-              <p className="text-sm text-muted-foreground">
-                输入一个主题，让 AI 为你生成相关人物清单
-              </p>
-            </div>
-
+      {/* Main Content */}
+      <div className="container mx-auto px-4 pt-24 pb-8">
+        <div className="max-w-2xl mx-auto space-y-8">
+          {/* Game Setup Card */}
+          <div className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm">
             <div className="space-y-4">
+              <div className="space-y-1.5">
+                <h2 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">探索人物</h2>
+                <p className="text-muted-foreground">
+                  输入一个人物主题，让 AI 为你生成相关人物
+                </p>
+              </div>
+
               <div className="flex gap-3">
                 <Input
                   type="text"
-                  placeholder="输入你的主题（例如：'中国古代'，'好莱坞电影'）"
-                  className="flex-1 rounded-full h-12"
+                  placeholder="输入主题（如：'三国时期武将'，'明朝官员'，'中国皇帝'）"
+                  className="flex-1 h-12 rounded-full bg-background/50"
                   value={theme}
                   onChange={(e) => setTheme(e.target.value)}
                   disabled={isLoading}
@@ -128,7 +134,7 @@ export default function GamePage() {
                   onValueChange={setLanguage}
                   disabled={isLoading}
                 >
-                  <SelectTrigger className="w-[100px] rounded-full h-12">
+                  <SelectTrigger className="w-24 h-12 rounded-full bg-background/50">
                     <SelectValue placeholder="语言" />
                   </SelectTrigger>
                   <SelectContent>
@@ -139,47 +145,48 @@ export default function GamePage() {
               </div>
 
               <Button 
-                className="w-full rounded-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70" 
+                className="w-full h-12 rounded-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
                 disabled={!hasApiKey || isLoading}
                 onClick={handleGenerateConcepts}
               >
-                {isLoading ? "AI 正在生成中..." : "开始生成"}
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-background border-r-transparent" />
+                    AI 正在生成...
+                  </span>
+                ) : (
+                  "开始生成"
+                )}
               </Button>
 
               {!hasApiKey && (
-                <p className="text-sm text-muted-foreground text-center">
-                  请先设置 OpenRouter API Key 以开始游戏
-                </p>
+                <div className="p-4 rounded-2xl bg-background/50 text-sm text-muted-foreground">
+                  ⚠️ 请先设置 OpenRouter API Key 以开始游戏
+                </div>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Game Board Section */}
-        {concepts && (
-          <div className="space-y-6 max-w-4xl mx-auto">
-            <Board concepts={concepts} />
-            
-            {/* Game Rules Card */}
-            <div className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm">
-              <h3 className="text-lg font-semibold mb-3">游戏规则</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <div className="space-y-1">
-                  <p className="font-medium">基本操作</p>
-                  <p className="text-sm text-muted-foreground">左键点击揭示人物，右键标记地雷</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="font-medium">数字提示</p>
-                  <p className="text-sm text-muted-foreground">数字表示周围8格中的地雷数量</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="font-medium">胜利条件</p>
-                  <p className="text-sm text-muted-foreground">成功找出所有相关人物即可获胜</p>
+          {/* Game Board Section */}
+          {concepts && (
+            <div className="space-y-6">
+              <div className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">游戏面板</h3>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="px-3 py-1 rounded-full bg-background/50">左键：揭示</span>
+                      <span className="px-3 py-1 rounded-full bg-background/50">右键：标记</span>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <Board concepts={concepts} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </main>
   )
