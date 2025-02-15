@@ -33,11 +33,21 @@ export function Cell({
 
   const renderContent = () => {
     if (isFlagged) {
-      return "🚩"
+      return (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="text-3xl">🚩</span>
+        </div>
+      )
     }
 
     if (!isRevealed) {
-      return <span className="text-foreground">{conceptName}</span>
+      return (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="text-foreground text-sm leading-tight break-words text-center w-[90%] line-clamp-3">
+            {conceptName}
+          </span>
+        </div>
+      )
     }
 
     if (isMine) {
@@ -45,10 +55,12 @@ export function Cell({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span>💣</span>
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-3xl">💣</span>
+              </div>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{conceptName}</p>
+              <p className="max-w-[200px] break-words">{conceptName}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -60,19 +72,21 @@ export function Cell({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className={cn(
-                "font-bold text-base",
-                adjacentMines === 1 && "text-blue-500",
-                adjacentMines === 2 && "text-green-500",
-                adjacentMines === 3 && "text-red-500",
-                adjacentMines === 4 && "text-purple-500",
-                adjacentMines >= 5 && "text-yellow-500"
-              )}>
-                {adjacentMines}
-              </span>
+              <div className="w-full h-full flex items-center justify-center">
+                <span className={cn(
+                  "font-bold text-2xl",
+                  adjacentMines === 1 && "text-blue-500",
+                  adjacentMines === 2 && "text-green-500",
+                  adjacentMines === 3 && "text-red-500",
+                  adjacentMines === 4 && "text-purple-500",
+                  adjacentMines >= 5 && "text-yellow-500"
+                )}>
+                  {adjacentMines}
+                </span>
+              </div>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{conceptName}</p>
+              <p className="max-w-[200px] break-words">{conceptName}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -86,7 +100,7 @@ export function Cell({
     <Button
       variant="outline"
       className={cn(
-        "w-full h-full min-h-[60px] p-1 text-xs sm:text-sm border relative",
+        "w-[72px] h-[72px] p-0 border relative overflow-hidden",
         isRevealed && "bg-secondary",
         isRevealed && isMine && "bg-destructive hover:bg-destructive",
         !isRevealed && "hover:bg-secondary/50",

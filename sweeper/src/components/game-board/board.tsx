@@ -227,9 +227,9 @@ export function Board({
   }
 
   return (
-    <Card className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <div className="text-sm font-medium">
+    <Card className="p-8 max-w-[900px] mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <div className="text-base font-medium">
           <span>地雷: {minesCount} | 标记: {flagsCount}</span>
         </div>
         <Button
@@ -241,29 +241,31 @@ export function Board({
         </Button>
       </div>
       
-      <div className="grid gap-1" 
-        style={{
-          gridTemplateColumns: `repeat(${size.cols}, minmax(0, 1fr))`,
-        }}
-      >
-        {board.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <Cell
-              key={`${rowIndex}-${colIndex}`}
-              conceptName={cell.conceptName}
-              isMine={cell.isMine}
-              isRevealed={cell.isRevealed}
-              isFlagged={cell.isFlagged}
-              adjacentMines={cell.adjacentMines}
-              onClick={() => revealCell(rowIndex, colIndex)}
-              onRightClick={() => toggleFlag(rowIndex, colIndex)}
-            />
-          ))
-        )}
+      <div className="flex justify-center">
+        <div className="grid gap-3" 
+          style={{
+            gridTemplateColumns: `repeat(${size.cols}, 72px)`,
+          }}
+        >
+          {board.map((row, rowIndex) =>
+            row.map((cell, colIndex) => (
+              <Cell
+                key={`${rowIndex}-${colIndex}`}
+                conceptName={cell.conceptName}
+                isMine={cell.isMine}
+                isRevealed={cell.isRevealed}
+                isFlagged={cell.isFlagged}
+                adjacentMines={cell.adjacentMines}
+                onClick={() => revealCell(rowIndex, colIndex)}
+                onRightClick={() => toggleFlag(rowIndex, colIndex)}
+              />
+            ))
+          )}
+        </div>
       </div>
 
       {gameStatus !== 'playing' && (
-        <div className="mt-4 text-center font-medium">
+        <div className="mt-8 text-center font-medium text-lg">
           {gameStatus === 'won' ? '🎉 恭喜获胜！' : gameStatus === 'lost' ? '💥 游戏结束！' : '开始新游戏'}
         </div>
       )}
