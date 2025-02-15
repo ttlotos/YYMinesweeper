@@ -67,18 +67,12 @@ cd sweeper
 pnpm install
 ```
 
-3. 设置环境变量：
-```bash
-# 创建 .env.local 文件并添加：
-OPENROUTER_API_KEY=your_api_key_here
-```
-
-4. 启动开发服务器：
+3. 启动开发服务器：
 ```bash
 pnpm dev
 ```
 
-5. 在浏览器中打开 [http://localhost:3000](http://localhost:3000)
+4. 在浏览器中打开 [http://localhost:3000](http://localhost:3000)
 
 ## 游戏玩法
 

@@ -67,18 +67,12 @@ cd sweeper
 pnpm install
 ```
 
-3. Set up environment variables:
-```bash
-# Create a .env.local file and add:
-OPENROUTER_API_KEY=your_api_key_here
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 pnpm dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## How to Play
 
