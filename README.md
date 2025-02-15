@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-A unique web-based minesweeper game where players can input a character (real or fictional), and AI generates character-related concepts for game cells. Safe zones are filled with concepts related to the character, while mines are hidden among unrelated concepts.
+A unique minesweeper game that lets you explore an AI-generated world of characters. Input any theme that interests you, and watch as AI intelligently generates relevant characters and misleading options. Through gameplay, discover and learn about characters related to your chosen theme.
 
 ## Features
 
