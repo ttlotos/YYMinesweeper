@@ -19,6 +19,26 @@ A unique web-based minesweeper game where players can input a character (real or
 - 🌏 Multi-language support (Chinese/English)
 - 📱 Responsive design for various screen sizes
 
+## Screenshots
+
+Here are some screenshots of the game interface:
+
+### Home Page
+![Home Page](./assets/screenshots/home.png)
+*The landing page where you can start a new game*
+
+### Character Input
+![Character Input](./assets/screenshots/character-input.png)
+*Input your chosen character and select language*
+
+### Gameplay
+![Gameplay](./assets/screenshots/gameplay.png)
+*Active gameplay showing revealed cells and flags*
+
+### Game Over
+![Game Over](./assets/screenshots/game-over.png)
+*Game over screen showing all cells*
+
 ## Tech Stack
 
 - **Frontend**: Next.js 14 (App Router)

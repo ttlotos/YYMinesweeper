@@ -19,6 +19,26 @@
 - 🌏 多语言支持（中文/英文）
 - 📱 响应式设计，适配多种屏幕尺寸
 
+## 游戏截图
+
+以下是游戏界面的一些截图：
+
+### 首页
+![首页](./assets/screenshots/home.png)
+*可以开始新游戏的登录页面*
+
+### 人物输入
+![人物输入](./assets/screenshots/character-input.png)
+*输入你选择的人物并选择语言*
+
+### 游戏进行中
+![游戏进行中](./assets/screenshots/gameplay.png)
+*显示已揭示格子和旗帜的游戏画面*
+
+### 游戏结束
+![游戏结束](./assets/screenshots/game-over.png)
+*显示所有格子的游戏结束画面*
+
 ## 技术栈
 
 - **前端框架**：Next.js 14（App Router）
