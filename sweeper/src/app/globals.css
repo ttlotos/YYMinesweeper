@@ -61,3 +61,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Cell Flip Animation */
+.cell-front, .cell-back {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.cell-back {
+  transform: rotateY(180deg);
+}

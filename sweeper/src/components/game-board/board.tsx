@@ -43,32 +43,32 @@ export function Board({
     if (concepts.confusingConcepts.length >= CONFUSING_CONCEPTS_COUNT) {
       // 如果混淆概念足够，只取前20个
       normalizedConfusingConcepts = concepts.confusingConcepts.slice(0, CONFUSING_CONCEPTS_COUNT)
-    } else if (concepts.confusingConcepts.length > 0) {
-      // 如果有混淆概念但不够20个，循环使用现有的概念
-      normalizedConfusingConcepts = Array(CONFUSING_CONCEPTS_COUNT)
-        .fill(null)
-        .map((_, i) => concepts.confusingConcepts[i % concepts.confusingConcepts.length])
     } else {
-      // 如果完全没有混淆概念，才使用填充内容
+      // 如果不够20个，使用填充内容
       normalizedConfusingConcepts = Array(CONFUSING_CONCEPTS_COUNT)
         .fill(null)
-        .map((_, i) => `混淆概念 ${i + 1}`)
+        .map((_, i) => {
+          if (i < concepts.confusingConcepts.length) {
+            return concepts.confusingConcepts[i]
+          }
+          return `混淆概念 ${i + 1}`
+        })
     }
 
     let normalizedRelatedConcepts: string[]
     if (concepts.relatedConcepts.length >= RELATED_CONCEPTS_COUNT) {
       // 如果相关概念足够，只取前80个
       normalizedRelatedConcepts = concepts.relatedConcepts.slice(0, RELATED_CONCEPTS_COUNT)
-    } else if (concepts.relatedConcepts.length > 0) {
-      // 如果有相关概念但不够80个，循环使用现有的概念
-      normalizedRelatedConcepts = Array(RELATED_CONCEPTS_COUNT)
-        .fill(null)
-        .map((_, i) => concepts.relatedConcepts[i % concepts.relatedConcepts.length])
     } else {
-      // 如果完全没有相关概念，才使用填充内容
+      // 如果不够80个，使用填充内容
       normalizedRelatedConcepts = Array(RELATED_CONCEPTS_COUNT)
         .fill(null)
-        .map((_, i) => `相关概念 ${i + 1}`)
+        .map((_, i) => {
+          if (i < concepts.relatedConcepts.length) {
+            return concepts.relatedConcepts[i]
+          }
+          return `相关概念 ${i + 1}`
+        })
     }
 
     // Create empty board
