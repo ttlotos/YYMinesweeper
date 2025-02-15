@@ -1,15 +1,15 @@
-# Theme Minesweeper (主题扫雷)
+# Character Minesweeper (人物扫雷)
 
 ## Project Overview
 
 ### Project Description
-A web-based minesweeper game that allows users to customize themes. The game uses AI (Claude via OpenRouter) to automatically generate theme-related concepts (safe zones) and unrelated concepts (mine zones).
+A web-based minesweeper game that allows users to input characters (real or fictional). The game uses AI (Claude via OpenRouter) to automatically generate character-related concepts (safe zones) and unrelated concepts (mine zones).
 
 ### Version Goal
-Version 1.0 focuses on implementing core game functionality, validating the feasibility and entertainment value of user-defined themes + AI concept generation, and providing a basic gaming experience.
+Version 1.0 focuses on implementing core game functionality, validating the feasibility and entertainment value of character-based + AI concept generation, and providing a basic gaming experience.
 
 ### Target Users
-Users interested in minesweeper games, who enjoy exploring different themes and are curious about AI technology applications.
+Users interested in minesweeper games, who enjoy exploring different characters and are curious about AI technology applications.
 
 ## Technical Stack
 
@@ -46,12 +46,12 @@ Users interested in minesweeper games, who enjoy exploring different themes and 
 
 1. Board Configuration
    - 10x10 grid layout
-   - 20 mines (confusing concepts)
-   - 80 safe cells (related concepts)
+   - 20 mines (unrelated concepts)
+   - 80 safe cells (character-related concepts)
 
 2. Concept Distribution
-   - Mines are mapped to confusing concepts (20)
-   - Safe cells are mapped to related concepts (80)
+   - Mines are mapped to unrelated concepts (20)
+   - Safe cells are mapped to character-related concepts (80)
    - Concepts are randomly distributed on the board
    - Concept normalization system:
      ```typescript
@@ -135,8 +135,8 @@ interface ConceptsResponse {
 
 ## Implementation Details
 
-### 1. Theme Customization
-- Theme input with language selection (zh/en)
+### 1. Character Input
+- Character input with language selection (zh/en)
 - API integration for concept generation
 - Concept normalization and distribution
 

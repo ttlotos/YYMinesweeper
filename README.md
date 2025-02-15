@@ -1,20 +1,22 @@
-# Theme Minesweeper (主题扫雷)
+# Character Minesweeper
 
-A unique web-based minesweeper game where players can define custom themes, and AI generates theme-related concepts for game cells. Safe zones are filled with related concepts, while mines are hidden among unrelated concepts.
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
+A unique web-based minesweeper game where players can input a character (real or fictional), and AI generates character-related concepts for game cells. Safe zones are filled with concepts related to the character, while mines are hidden among unrelated concepts.
 
 ## Features
 
 - 🎮 Classic minesweeper gameplay (10x10 grid, 20 mines)
 - 🤖 AI-powered concept generation using Claude via OpenRouter
-- 🎨 Theme-based concept mapping:
-  - 80 safe cells with theme-related concepts
-  - 20 mines with theme-unrelated concepts
+- 👤 Character-based concept mapping:
+  - 80 safe cells with character-related concepts
+  - 20 mines with character-unrelated concepts
 - 🎯 Interactive gameplay:
   - Left-click to reveal cells
   - Right-click to place/remove flags
   - Tooltips showing concepts on revealed cells
   - Color-coded numbers for adjacent mine counts
-- 🌏 Multi-language support (中文/English)
+- 🌏 Multi-language support (Chinese/English)
 - 📱 Responsive design for various screen sizes
 
 ## Tech Stack
@@ -61,9 +63,9 @@ pnpm dev
 ## How to Play
 
 1. Enter your OpenRouter API key when prompted
-2. Input a theme of your choice (e.g., "Japanese cuisine", "Space exploration")
+2. Input a character of your choice (e.g., "Sherlock Holmes", "Marie Curie")
 3. Select your preferred language (中文/English)
-4. Wait for AI to generate theme-related concepts
+4. Wait for AI to generate character-related concepts
 5. Start playing:
    - Left-click to reveal cells
    - Right-click to place/remove flags
@@ -89,13 +91,13 @@ src/
 ### Completed
 - ✅ Core minesweeper mechanics
 - ✅ AI concept generation
-- ✅ Theme-based gameplay
+- ✅ Character-based gameplay
 - ✅ Multi-language support
 - ✅ Basic UI/UX implementation
 
 ### Planned Features
 - ⏳ Difficulty levels
-- ⏳ Theme saving
+- ⏳ Character saving
 - ⏳ Statistics tracking
 - ⏳ Sound effects
 - ⏳ Dark mode support
