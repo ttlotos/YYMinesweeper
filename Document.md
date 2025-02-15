@@ -16,8 +16,8 @@ Users interested in minesweeper games, who enjoy exploring different themes and 
 - **Frontend Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
-- **State Management**: React Context or Zustand (to be implemented)
-- **API Integration**: OpenRouter API with Claude (to be implemented)
+- **State Management**: React useState + useCallback
+- **API Integration**: OpenRouter API with Claude
 - **Deployment**: Vercel (planned)
 
 ## Current Project Status
@@ -32,15 +32,55 @@ Users interested in minesweeper games, who enjoy exploring different themes and 
 2. UI Implementation
    - Home page with game introduction
    - Theme input page layout
+   - Game board implementation
    - Basic navigation between pages
 
-### Pending Features
-1. Theme Input & Processing
-2. AI Integration
-3. Game Board Implementation
-4. Game Logic
-5. State Management
-6. Styling Refinements
+3. Game Implementation
+   - Core minesweeper mechanics
+   - Concept-based gameplay
+   - Interactive cell revealing
+   - Flag placement system
+   - Win/lose conditions
+
+### Game Mechanics Details
+
+1. Board Configuration
+   - 10x10 grid layout
+   - 20 mines (confusing concepts)
+   - 80 safe cells (related concepts)
+
+2. Concept Distribution
+   - Mines are mapped to confusing concepts (20)
+   - Safe cells are mapped to related concepts (80)
+   - Concepts are randomly distributed on the board
+   - Concept normalization system:
+     ```typescript
+     // For confusing concepts (mines)
+     if (count >= 20) -> use first 20
+     if (0 < count < 20) -> cycle through available concepts
+     if (count = 0) -> use placeholder concepts
+
+     // For related concepts (safe cells)
+     if (count >= 80) -> use first 80
+     if (0 < count < 80) -> cycle through available concepts
+     if (count = 0) -> use placeholder concepts
+     ```
+
+3. Gameplay Features
+   - First click safety
+   - Adjacent mine counting
+   - Recursive cell revealing for empty cells
+   - Flag placement system
+   - Win/lose state management
+   - Game restart functionality
+
+4. UI Elements
+   - Concept display on unrevealed cells
+   - Mine count and flag count display
+   - Tooltip system for revealed cells
+   - Color-coded numbers for adjacent mine counts
+   - Game status messages
+   - Restart button
 
 ## Project Structure
 
@@ -52,105 +92,91 @@ sweeper/
 │   │   ├── layout.tsx            # Root layout
 │   │   ├── globals.css           # Global styles
 │   │   └── game/
-│   │       └── page.tsx          # Game page
+│   │       └── page.tsx          # Game page with theme input and board
 │   ├── components/
 │   │   ├── ui/                   # shadcn/ui components
 │   │   │   ├── button.tsx
 │   │   │   ├── card.tsx
 │   │   │   ├── dialog.tsx
 │   │   │   ├── input.tsx
+│   │   │   ├── tooltip.tsx
 │   │   │   └── scroll-area.tsx
-│   │   ├── game-board/           # Game board components (pending)
-│   │   ├── theme-input/          # Theme input components (pending)
-│   │   └── concept-preview/      # Concept preview components (pending)
+│   │   ├── game-board/          # Game components
+│   │   │   ├── board.tsx        # Main game board logic
+│   │   │   └── cell.tsx         # Individual cell component
+│   │   ├── api-key-dialog.tsx   # API key input dialog
+│   │   └── theme-input/         # Theme input components
 │   ├── lib/
-│   │   ├── utils.ts              # Utility functions
-│   │   └── api/                  # API integration (pending)
+│   │   ├── utils.ts             # Utility functions
+│   │   ├── cookies.ts           # Cookie management
+│   │   └── api.ts               # API integration
 │   └── types/
-│       └── index.ts              # Type definitions
-├── public/                       # Static assets
-├── tailwind.config.ts           # Tailwind configuration
-├── components.json              # shadcn/ui configuration
-└── package.json                 # Project dependencies
+│       └── index.ts             # Type definitions
 ```
 
 ## Type Definitions
 
 ```typescript
 // Game State Interface
-interface GameState {
-  theme: string;
-  board: Cell[][];
-  relatedConcepts: string[];
-  unrelatedConcepts: string[];
-  gameStatus: 'idle' | 'playing' | 'won' | 'lost';
-}
-
-// Cell Interface
-interface Cell {
-  conceptName: string;
-  isMine: boolean;
-  isRevealed: boolean;
-  adjacentMines: number;
+interface GameCell {
+  conceptName: string
+  isMine: boolean
+  isRevealed: boolean
+  isFlagged: boolean
+  adjacentMines: number
 }
 
 // API Response Interface
-interface OpenRouterResponse {
-  relatedConcepts: string[];
-  unrelatedConcepts: string[];
+interface ConceptsResponse {
+  relatedConcepts: string[]    // At least 80 items required
+  confusingConcepts: string[]  // At least 20 items required
 }
 ```
 
 ## Implementation Details
 
-### 1. Theme Customization (In Progress)
-- Basic input UI implemented
-- Theme validation pending
-- API integration pending
+### 1. Theme Customization
+- Theme input with language selection (zh/en)
+- API integration for concept generation
+- Concept normalization and distribution
 
-### 2. AI Integration (Pending)
-- OpenRouter API setup needed
-- Prompt engineering required
-- Error handling to be implemented
+### 2. Game Board
+- Dynamic grid generation
+- Cell state management
+- Interactive cell revealing
+- Flag placement system
+- Adjacent mine calculation
+- Win/lose condition checking
 
-### 3. Game Board (Pending)
-- Grid layout to be implemented
-- Cell component design needed
-- Game logic implementation required
-
-### 4. UI/UX Design
-#### Implemented
+### 3. UI/UX Design
 - Clean, modern interface with Tailwind CSS
-- Basic responsive design
-- shadcn/ui component integration
-
-#### Pending
-- Dark mode implementation
-- Loading states
-- Error handling UI
-- Game board styling
+- Responsive design
+- Tooltips for revealed cells
+- Color-coded numbers
+- Game status indicators
+- Flag counter
 
 ## Next Steps
 
-1. Implement theme input validation
-2. Set up OpenRouter API integration
-3. Create game board component
-4. Implement basic game logic
-5. Add state management
-6. Enhance UI/UX with animations and transitions
+1. Add difficulty levels
+2. Implement theme saving
+3. Add animation effects
+4. Improve mobile experience
+5. Add sound effects
+6. Implement statistics tracking
 
 ## Security Considerations
 
-- API key management (to be implemented)
-- Input sanitization (to be implemented)
-- Rate limiting (to be planned)
-- Error handling (to be implemented)
+- API key management via cookies
+- Input sanitization
+- Rate limiting via OpenRouter
+- Error handling with user feedback
 
 ## Future Enhancements (v2.0+)
 
 - User accounts and progress tracking
 - Custom theme saving
-- Difficulty levels
+- Multiple difficulty levels
 - Multiplayer support
 - Theme-based visual customization
 - Advanced concept editing
